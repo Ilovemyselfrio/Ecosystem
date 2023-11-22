@@ -21,7 +21,7 @@ public:
 
 	friend ostream& operator << (ostream& os, Creature& creature);
 	string get_nam() const;
-	int get_age() const;
+	//int get_age() const;
 	void ageadd();
 	string get_gend() const;
 public:

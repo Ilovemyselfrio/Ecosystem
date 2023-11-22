@@ -37,6 +37,7 @@ bool Wolf::Judge(Creature* part) {
 				this->set_x(part->get_x());
 				this->set_y(part->get_y());
 				return true;
+
 			}
 			else {
 				cout << "Ôã¸âÈÃÑò" << part->get_nam() << "ÌÓµôÁË......" << endl;
