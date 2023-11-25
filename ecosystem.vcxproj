@@ -139,6 +139,7 @@
     <ClCompile Include="grass.cpp" />
     <ClCompile Include="sheep.cpp" />
     <ClCompile Include="wolf.cpp" />
+    <ClCompile Include="Ecosystem.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="ClassDiagram.cd" />

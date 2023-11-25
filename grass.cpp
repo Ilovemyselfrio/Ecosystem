@@ -1,8 +1,15 @@
 
 #include "grass.h"
 
-void Grass::print() {
+string Grass::serialize() const
+{
+	ostringstream oss;
+	oss << "Grass" << " " << this->vitality << " " << this->x << " " << this->y;
+	return oss.str();
+}
 
+void Grass::print() {
+	
 }
 
 void Grass::move()

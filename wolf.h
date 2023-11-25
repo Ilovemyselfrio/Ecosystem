@@ -22,6 +22,7 @@ public:
 	 bool Ishungary() override;
 	 void plus_Vital() ;
 	 void print() override;
+	 string serialize() const override;
 private:
 	int amount_eat = 0;
 };

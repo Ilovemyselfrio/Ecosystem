@@ -90,6 +90,14 @@ bool Sheep::Judge(Creature* part) {
 	else return false;
 }
 
+string Sheep::serialize() const
+{
+	ostringstream oss;
+	oss << "Sheep" << " " << this->name << " " << this->age << " " << this->gender << " " << this->vitality << " "  << this->amount_eat
+		<< " " << this->x << " " << this->y;
+	return oss.str();
+}
+
 bool Sheep::Ishungary() {
 	if (this->vitality < 40.0) {
 		/*cout << "羊" << this->name << "现在有些饿，" << "咩咩咩~它想吃草啦...";

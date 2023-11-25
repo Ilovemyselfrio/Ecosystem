@@ -47,6 +47,9 @@
     <ClCompile Include="grass.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
+    <ClCompile Include="Ecosystem.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="ClassDiagram.cd" />

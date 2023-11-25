@@ -21,6 +21,7 @@ public:
 	void plus_Vital();
 	void print() override;
 	bool Judge(Creature* part) override;
+	string serialize() const override;
 private:
 	int amount_eat = 0;
 };

@@ -61,7 +61,7 @@ void Wolf::eat(Creature* part)
 }
 
 void Wolf::plus_Vital() {
-	this->set_vital(this->get_vital() + 20.0);
+	this->set_vital(110);
 	cout << "它现在的活力是" << this->get_vital() << endl;
 }
 
@@ -92,10 +92,10 @@ void Wolf::move()
 {
 	int direction = rand() % 4;
 	switch (direction) {
-	case 0: x += 10; break;
-	case 1: x -= 10; break;
-	case 2: y += 10; break;
-	case 3: y -= 10; break;
+	case 0: x += 10, vitality -= 10; break;
+	case 1: x -= 10, vitality -= 10; break;
+	case 2: y += 10, vitality -= 10; break;
+	case 3: y -= 10, vitality -= 10; break;
 	}
 }
 
@@ -122,5 +122,13 @@ bool Wolf:: Ishungary() {
 void Wolf::print() {
 	cout << "狼" << name << "的信息：" << "年龄:" << age << ", 性别:" << gender << ", 活力值:" << vitality;
 	cout << ", 吃羊数:" << amount_eat << "，位置:" << *this << endl;
+}
+
+string Wolf::serialize() const
+{
+	ostringstream oss;
+	oss << "Wolf" << " " << this->name << " " << this->age << " " << this->gender << " " << this->vitality << " " << this->amount_eat 
+		<< " " << this->x << " " << this->y;
+	return oss.str();
 }
 
