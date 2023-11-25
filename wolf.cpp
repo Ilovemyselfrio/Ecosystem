@@ -67,7 +67,6 @@ void Wolf::plus_Vital() {
 
 void Wolf::breed(vector<Creature*>& creatures)
 {
-	vector<Creature*> NewWolf;
 	for (Creature* creature: creatures) {
 		if (creature != this) {
 			if (dynamic_cast<Wolf*>(creature) != nullptr) {
@@ -75,16 +74,13 @@ void Wolf::breed(vector<Creature*>& creatures)
 					int chance = rand() % 100;
 					if (chance < 60) {
 						Creature* newWolf = new Wolf(rand_name(), rand_sex(), 0, 10, rand() % 50, rand() % 50);
-						NewWolf.push_back(newWolf);
+						creatures.push_back(newWolf);
 						cout << "A new wolf is born!" << endl;
 						break;
 					}
 				}
 			}
 		}
-	}
-	for (Creature* creature : NewWolf) {
-		creatures.push_back(creature);
 	}
 }
 

@@ -33,6 +33,7 @@ void Ecosystem::simulateEcosystem(int time) {
 	for (int month = 1; month <= time; month++) {
 		cout << "---------------------------------------------------------------" << endl;
 		cout << "第" << month << "个月:" << endl;
+		simDisaster();
 		if (month % 12 == 0) {
 			for (Creature* creature : creatures) {
 				int age = creature->get_age();
@@ -77,6 +78,7 @@ void Ecosystem::simulateEcosystem(int time) {
 
 		system("pause");
 		system("cls");
+		simHumaInter();
 
 	}
 	cout << "------------------------------------经过时间的洗礼----------------------------------" << endl;
@@ -180,21 +182,150 @@ string Ecosystem::rand_name()
 	return ran_nam;
 }
 
+void Ecosystem::removeObj(Creature* creature)
+{
+	auto it = find(creatures.begin(), creatures.end(), creature);
+	if (it != creatures.end()) {
+		creatures.erase(it);
+		delete creature;
+	}
+	
+}
+
 void Ecosystem::simHumaInter()
 {
-	/*cout << "请输入您想进行的操作:" << endl;
-	cout << "1:添加生物   2:删除生物" << endl;
+	cout << "请输入您想进行的操作:" << endl;
+	cout << "1:添加生物   2:捕食生物  3:不进行人为干预" << endl;
 	int fchoice;
 	cin >> fchoice;
 	if (fchoice == 1) {
 		cout << "请输入您想要添加的生物:" << endl;
-		cout << "1:添加狼  2:添加羊  3:添加草" << endl;
+		cout << "1:增加狼的数量  2:增加羊的数量  " << endl;
 		int schoice;
 		cin >> schoice;
 		switch (schoice) {
-		case 1:
-
+		case 1: {
+			cout << "请输入添加狼的数量:" << endl;
+			int cnt;
+			cin >> cnt;
+			for (int i = 1; i <= cnt; i++) {
+				Creature* wolf = new Wolf(rand_name(), rand_sex(), rand() % 10, rand() % 100, rand() % 50, rand() % 50);
+				addCreature(wolf);
+			}
+			break;
 		}
-	}*/
+		case 2: {
+			cout << "请输入添加羊的数量:" << endl;
+			int cnt;
+			cin >> cnt;
+			for (int i = 1; i <= cnt; i++) {
+				Creature* sheep = new Sheep(rand_name(), rand_sex(), rand() % 10, rand() % 100, rand() % 50, rand() % 50);
+				addCreature(sheep);
+			}
+			break;
+		}
+		default:
+			cout << "无效输入！" << endl;
+}
+	}
+	else if (fchoice == 2) {
+		cout << "请输入您想要捕捉的生物:" << endl;
+		cout << "1:捕食狼  2:捕食羊 " << endl;
+		int schoice;
+		cin >> schoice;
+		switch (schoice) {
+		case 1: {
+			cout << "请决定捕食狼的数量:" << endl;
+			int cnt;
+			cin >> cnt;
+			for (int i = 1; i <= cnt; i++) {
+				bool wolfFound = false;
+				Wolf* wolfT = NULL;
+				for (Creature* creature : creatures) {
+					Wolf* wolf = dynamic_cast<Wolf*>(creature);
+					if (wolf) {
+						wolfT = wolf;
+						wolfFound = true;
+						break;
+					}
+				}
+				if (wolfFound) {
+					cout << "成功捕食第" << i << "头狼" << endl;
+					removeObj(wolfT);
+				}
+				else {
+					cout << "找不到狼了......" << endl;
+				}
+			}
+			break;
+		}
+		case 2: {
+			cout << "请决定捕食羊的数量:" << endl;
+			int cnt;
+			cin >> cnt;
+			for (int i = 1; i <= cnt; i++) {
+				bool sheepFound = false;
+				Sheep* sheepT = NULL;
+				for (Creature* creature : creatures) {
+					Sheep* sheep = dynamic_cast<Sheep*>(creature);
+					if (sheep) {
+						sheepT = sheep;
+						sheepFound = true;
+						break;
+					}
+				}
+				if (sheepFound) {
+					cout << "成功捕食第" << i << "头羊" << endl;
+					removeObj(sheepT);
+				}
+				else {
+					cout << "找不到羊了......" << endl;
+				}
+			}
+			break;
+	        }			
+		}
+	}
+	else if (fchoice == 3) {
+		return;
+	}
+}
+
+void Ecosystem::simDisaster()
+{
+	int chance = rand() % 100;
+	if (chance < 30) {
+		for (Creature* creature : creatures) {
+			Wolf* wolf = dynamic_cast<Wolf*>(creature);
+			Sheep* sheep = dynamic_cast<Sheep*>(creature);
+			if (wolf) {
+				int vit = wolf->get_vital();
+				wolf->set_vital( vit - 4);
+				cout << "狼受到了雷电的惊吓，活力下降..." << endl;
+			}
+			if (sheep) {
+				int vit = sheep->get_vital();
+				sheep->set_vital(vit - 5);
+				cout << "羊受到了雷电的惊吓，活力下降..." << endl;
+			}
+		}
+	}
+	else if (chance < 10) {
+		int num = rand() % 5 + 1;
+		for (int i = 1; i <= num; i++) {
+			for (Creature* creature : creatures) {
+				Wolf* wolf = dynamic_cast<Wolf*>(creature);
+				Sheep* sheep = dynamic_cast<Sheep*>(creature);
+				if (wolf) {
+					wolf->set_vital(0);
+					cout << "有只狼被不幸被雷劈死了!" << endl;
+				}
+				if (sheep) {
+					sheep->set_vital(0);
+					cout << "有只羊被不幸被雷劈死了!" << endl;
+				}
+			}
+		}
+	}
 }
 

@@ -19,7 +19,9 @@ public:
 	void Eco_print();
 	string rand_sex();
 	string rand_name();
+	void removeObj(Creature* creature);
 	void simHumaInter();
+	void simDisaster();
 private:
 	vector<Creature*> creatures;
 	int numW;

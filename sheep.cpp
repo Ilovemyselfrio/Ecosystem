@@ -34,7 +34,6 @@ void Sheep::eat(Creature* part)
 }
 
 void Sheep::breed(vector<Creature*>& creatures) {
-	vector<Creature*> Newsheep;
 	for (Creature* creature : creatures) {
 		if (creature != this) {
 			if (dynamic_cast<Sheep*>(creature) != nullptr) {
@@ -42,16 +41,13 @@ void Sheep::breed(vector<Creature*>& creatures) {
 					int chance = rand() % 100;
 					if (chance < 90) {
 						Creature* newSheep = new Sheep(rand_name(), rand_sex(), 0, 10, rand() % 50, rand() % 50);
-						Newsheep.push_back(newSheep);
+						creatures.push_back(newSheep);
 						cout << "A new sheep is born!" << endl;
 						break;
 					}
 				}
 			}
 		}
-	}
-	for (Creature* creature : Newsheep) {
-		creatures.push_back(creature);
 	}
 }
 
