@@ -78,7 +78,7 @@ void Ecosystem::simulateEcosystem(int time) {
 
 		system("pause");
 		system("cls");
-		simHumaInter();
+		simHumaInter();//人为干预
 
 	}
 	cout << "------------------------------------经过时间的洗礼----------------------------------" << endl;

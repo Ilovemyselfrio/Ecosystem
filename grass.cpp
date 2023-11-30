@@ -9,7 +9,8 @@ string Grass::serialize() const
 }
 
 void Grass::print() {
-	
+	cout << "草的信息：" << "活力值:" << vitality;
+	cout  << "，位置:" << *this << endl;
 }
 
 void Grass::move()
